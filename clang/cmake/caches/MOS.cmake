@@ -7,7 +7,7 @@ set(LLVM_TARGETS_TO_BUILD "X86"
     CACHE STRING "LLVM targets to build")
 set(LLVM_EXPERIMENTAL_TARGETS_TO_BUILD "MOS"
     CACHE STRING "LLVM experimental targets to build")
-set(LLVM_ENABLE_PROJECTS clang;clang-tools-extra;lld
+set(LLVM_ENABLE_PROJECTS clang;clang-tools-extra;lld;lldb
     CACHE STRING "LLVM projects to enable")
 set(LLVM_ENABLE_LIBXML2 "OFF" CACHE STRING "")
 set(LLVM_ENABLE_ZLIB "OFF" CACHE STRING "")
