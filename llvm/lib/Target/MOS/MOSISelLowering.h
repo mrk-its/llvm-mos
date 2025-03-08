@@ -90,6 +90,8 @@ public:
   MachineBasicBlock *
   EmitInstrWithCustomInserter(MachineInstr &MI,
                               MachineBasicBlock *MBB) const override;
+
+  bool shouldExpandCmpUsingSelects(EVT VT) const override { return true; }
 };
 
 } // namespace llvm
