@@ -33,8 +33,12 @@ set(CMAKE_BUILD_TYPE MinSizeRel CACHE STRING "CMake build type")
 set(LLDB_INCLUDE_TESTS OFF CACHE BOOL "Include lldb tests")
 
 # Ship the release with these tools
-set(LLVM_INSTALL_TOOLCHAIN_ONLY ON CACHE BOOL "")
+set(LLVM_TOOLCHAIN_UTILITIES FileCheck CACHE STRING "")
+set(LLVM_INSTALL_UTILS ON CACHE BOOL "")
+
+set(LLVM_INSTALL_TOOLCHAIN_ONLY OFF CACHE BOOL "")
 set(LLVM_TOOLCHAIN_TOOLS
+  llvm-config
   llvm-addr2line
   llvm-ar
   llvm-cxxfilt
