@@ -344,6 +344,8 @@ MOSLegalizerInfo::MOSLegalizerInfo(const MOSSubtarget &STI) {
 
   // Other Operations
 
+  getActionDefinitionsBuilder({G_SCMP, G_UCMP}).lower();
+
   getActionDefinitionsBuilder(G_DYN_STACKALLOC).custom();
 
   getActionDefinitionsBuilder({G_STACKSAVE, G_STACKRESTORE}).lower();
