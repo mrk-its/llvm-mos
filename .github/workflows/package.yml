@@ -53,7 +53,7 @@ jobs:
             -DCMAKE_INSTALL_PREFIX=${{github.workspace}}/llvm-mos \
             -DLLVM_ENABLE_LIBXML2=OFF -DLLVM_TARGETS_TO_BUILD="X86;AArch64" \
             -DLLVM_INSTALL_TOOLCHAIN_ONLY=OFF -DLLVM_TOOLCHAIN_UTILITIES=FileCheck -DLLVM_INSTALL_UTILS=ON \
-            -DLLVM_MOS_TOOLCHAIN_TOOLS="llvm-config;llvm-addr2line;llvm-ar;llvm-cxxfilt;llvm-dwarfdump;llvm-mc;llvm-mlb;llvm-nm;llvm-objcopy;llvm-objdump;llvm-ranlib;llvm-readelf;llvm-readobj;llvm-size;llvm-strings;llvm-strip;llvm-symbolizer" \
+            -DLLVM_TOOLCHAIN_TOOLS="llvm-config;llvm-addr2line;llvm-ar;llvm-cxxfilt;llvm-dwarfdump;llvm-mc;llvm-mlb;llvm-nm;llvm-objcopy;llvm-objdump;llvm-ranlib;llvm-readelf;llvm-readobj;llvm-size;llvm-strings;llvm-strip;llvm-symbolizer" \
             -C../clang/cmake/caches/MOS.cmake \
             ../llvm
 
