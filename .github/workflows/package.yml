@@ -17,8 +17,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        # os: [windows-2019, macos-13, ubuntu-20.04]
-        os: [macos-13, ubuntu-20.04]
+        os: [windows-2019, macos-13, ubuntu-20.04]
     steps:
       - name: Setup Windows
         if: startsWith(matrix.os, 'windows')
@@ -68,10 +67,10 @@ jobs:
             ../llvm
 
       - name: Build
-        run: cd build; ninja distribution
+        run: cd build; ninja toolchain-distribution development-distribution
 
       - name: Install
-        run: cd build; ninja install-distribution-stripped
+        run: cd build; ninja install-toolchain-distribution-stripped
 
       - name: Archive Linux
         if: startsWith(matrix.os, 'ubuntu')
@@ -109,6 +108,49 @@ jobs:
           body: "Internal compiler build for Windows"
           tag_name: llvm-mos-windows-main
           files: llvm-mos-windows-main.7z
+
+      - name: Install Dev
+        run: cd build; rm -fr llvm-mos; ninja install-development-distribution-stripped
+
+      - name: Archive Linux Dev
+        if: startsWith(matrix.os, 'ubuntu')
+        run: tar -cJvf llvm-mos-linux-main-dev.tar.xz llvm-mos
+      - name: Archive Windows Dev
+        if: startsWith(matrix.os, 'windows')
+        run: 7z a llvm-mos-windows-main-dev.7z llvm-mos
+      - name: Archive macOS Dev
+        if: startsWith(matrix.os, 'macos')
+        run: tar -cJvf llvm-mos-darwin-main-dev.tar.xz llvm-mos
+
+      - name: Release Linux Dev
+        if: startsWith(matrix.os, 'ubuntu')
+        uses: softprops/action-gh-release@v1
+        with:
+          prerelease: true
+          body: "Internal compiler dev build for Linux"
+          tag_name: llvm-mos-linux-main-dev
+          files: llvm-mos-linux-main-dev.tar.xz
+
+      - name: Release macOS Dev
+        if: startsWith(matrix.os, 'macos')
+        uses: softprops/action-gh-release@v1
+        with:
+          prerelease: true
+          body: "Internal compiler dev build for macOS"
+          tag_name: llvm-mos-darwin-main-dev
+          files: llvm-mos-darwin-main-dev.tar.xz
+
+      - name: Release Windows Dev
+        if: startsWith(matrix.os, 'windows')
+        uses: softprops/action-gh-release@v1
+        with:
+          prerelease: true
+          body: "Internal compiler dev build for Windows"
+          tag_name: llvm-mos-windows-main-dev
+          files: llvm-mos-windows-main-dev.7z
+
+
+
   dispatch-sdk:
     if: ${{ false }}
     needs: package

@@ -12,6 +12,11 @@ set(LLVM_ENABLE_ZSTD "OFF" CACHE STRING "")
 
 set(LLVM_ENABLE_RUNTIMES compiler-rt CACHE STRING "")
 
+set(LLVM_DISTRIBUTIONS
+      Toolchain
+      Development
+    CACHE STRING "")
+
 set(LLVM_BUILTIN_TARGETS mos-unknown-unknown CACHE STRING "")
 set(LLVM_RUNTIME_TARGETS mos-unknown-unknown CACHE STRING "")
 set(BUILTINS_mos-unknown-unknown_COMPILER_RT_BAREMETAL_BUILD ON CACHE BOOL "")
@@ -38,7 +43,6 @@ set(LLVM_INSTALL_UTILS ON CACHE BOOL "")
 
 set(LLVM_INSTALL_TOOLCHAIN_ONLY OFF CACHE BOOL "")
 set(LLVM_TOOLCHAIN_TOOLS
-  llvm-config
   llvm-addr2line
   llvm-ar
   llvm-cxxfilt
@@ -56,7 +60,7 @@ set(LLVM_TOOLCHAIN_TOOLS
   llvm-strip
   llvm-symbolizer CACHE STRING "")
 
-set(LLVM_DISTRIBUTION_COMPONENTS
+set(LLVM_Toolchain_DISTRIBUTION_COMPONENTS
   builtins
   clang
   lld
@@ -71,6 +75,22 @@ set(LLVM_DISTRIBUTION_COMPONENTS
   find-all-symbols
   ${LLVM_TOOLCHAIN_TOOLS}
   CACHE STRING "")
+
+set(LLVM_Development_DISTRIBUTION_COMPONENTS
+  # LLVM
+  cmake-exports
+  development-cmake-exports
+  llvm-headers
+  llvm-libraries
+  # Clang
+  clang-cmake-exports
+  clang-development-cmake-exports
+  clang-headers
+  clang-libraries
+  llvm-config
+  ${LLVM_TOOLCHAIN_UTILITIES}
+CACHE STRING "")
+
 
 # Add clang symlinks prefixed with mos-* to allow distinguishing a llvm-mos
 # directory from a system clang directory.
