@@ -54,7 +54,7 @@ jobs:
             -C../clang/cmake/caches/MOS.cmake \
             ../llvm
       - name: Configure macOS
-        if: ${{!startsWith(matrix.os, 'macos')}}
+        if: ${{startsWith(matrix.os, 'macos')}}
         run: |
           mkdir build
           cd build
